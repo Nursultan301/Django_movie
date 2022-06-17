@@ -76,6 +76,11 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
 
+    # Это функция вернутся только родительский отзывы
+
+    def get_review(self):
+        return self.reviews_set.filter(parent__isnull=True)
+
 
 class MovieShots(models.Model):
     """ Кадры из фильма """
