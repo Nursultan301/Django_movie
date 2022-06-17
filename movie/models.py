@@ -82,7 +82,7 @@ class MovieShots(models.Model):
     title = models.CharField("Заголовок", max_length=50)
     description = models.TextField("Описание")
     images = models.ImageField("Изображение", upload_to="movie_shots/")
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, verbose_name="Фильм")
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, verbose_name="Фильм", related_name='movieshots')
 
     class Meta:
         verbose_name = "Кадры из фильма"
