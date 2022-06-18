@@ -13,9 +13,12 @@ class GenreAdmin(admin.ModelAdmin):
 @admin.register(Actor)
 class ActorAdmin(admin.ModelAdmin):
     list_display = ('name', 'age', 'get_photo')
+    readonly_fields = ('get_photo',)
 
     def get_photo(self, obj):
         return mark_safe(f'<img src="{obj.image.url}" width="50">')
+
+    get_photo.short_description = "Изображение"
 
 
 class ReviewInline(admin.TabularInline):
@@ -24,14 +27,26 @@ class ReviewInline(admin.TabularInline):
     readonly_fields = ('name', 'email')
 
 
+class MovieShotsInline(admin.TabularInline):
+    model = MovieShots
+    extra = 1
+    readonly_fields = ('get_photo', )
+
+    def get_photo(self, obj):
+        return mark_safe(f'<img src="{obj.images.url}" width="110">')
+
+    get_photo.short_description = "Миниатюра"
+
+
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'slug', 'get_photo', 'draft')
+    list_display = ('title', 'category', 'slug', 'draft')
     prepopulated_fields = {"slug": ("title",)}
     list_filter = ('category', 'year')
     search_fields = ('title', 'category__title')
     list_editable = ('draft',)
-    inlines = [ReviewInline]
+    readonly_fields = ("get_photo",)
+    inlines = [MovieShotsInline, ReviewInline]
     save_on_top = True
     save_as = True
     fieldsets = (
@@ -39,7 +54,7 @@ class MovieAdmin(admin.ModelAdmin):
             "fields": (("title", "tagline"),)
         }),
         (None, {
-            "fields": ("description", "poster")
+            "fields": ("description", ("poster", "get_photo"))
         }),
         (None, {
             "fields": ("year", "world_premiere", "country")
@@ -57,7 +72,9 @@ class MovieAdmin(admin.ModelAdmin):
     )
 
     def get_photo(self, obj):
-        return mark_safe(f'<img src="{obj.poster.url}" width="50">')
+        return mark_safe(f'<img src="{obj.poster.url}" width="110">')
+
+    get_photo.short_description = "Миниатюра"
 
 
 @admin.register(Category)
@@ -79,11 +96,19 @@ class RatingAdmin(admin.ModelAdmin):
 
 
 @admin.register(MovieShots)
-class RatingAdmin(admin.ModelAdmin):
-    list_display = ('title', 'movie')
+class MovieShotsAdmin(admin.ModelAdmin):
+    list_display = ('title', 'movie', 'get_photo')
+    readonly_fields = ('get_photo',)
+
+    def get_photo(self, obj):
+        return mark_safe(f'<img src="{obj.images.url}" width="75">')
+
+    get_photo.short_description = "Изображение"
 
 
 @admin.register(RatingStar)
 class RatingStarAdmin(admin.ModelAdmin):
     list_display = ('value',)
 
+
+admin.site.site_header = "Django Movies"
