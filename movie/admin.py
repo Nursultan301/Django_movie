@@ -30,7 +30,7 @@ class ReviewInline(admin.TabularInline):
 class MovieShotsInline(admin.TabularInline):
     model = MovieShots
     extra = 1
-    readonly_fields = ('get_photo', )
+    readonly_fields = ('get_photo',)
 
     def get_photo(self, obj):
         return mark_safe(f'<img src="{obj.images.url}" width="110">')
@@ -45,6 +45,7 @@ class MovieAdmin(admin.ModelAdmin):
     list_filter = ('category', 'year')
     search_fields = ('title', 'category__title')
     list_editable = ('draft',)
+    actions = ["publish", "unpublished"]
     readonly_fields = ("get_photo",)
     inlines = [MovieShotsInline, ReviewInline]
     save_on_top = True
@@ -75,6 +76,30 @@ class MovieAdmin(admin.ModelAdmin):
         return mark_safe(f'<img src="{obj.poster.url}" width="110">')
 
     get_photo.short_description = "Миниатюра"
+
+    def unpublished(self, request, queryset):
+        """ Снять с публикации """
+        row_update = queryset.update(draft=True)
+        if row_update == 1:
+            message_bit = "1 записей была обновлена"
+        else:
+            message_bit = f'{row_update} записей были обновлены'
+        self.message_user(request, f'{message_bit}')
+
+    def publish(self, request, queryset):
+        """ Снять с публикации """
+        row_update = queryset.update(draft=False)
+        if row_update == 1:
+            message_bit = "1 записей была обновлена"
+        else:
+            message_bit = f'{row_update} записей были обновлены'
+        self.message_user(request, f'{message_bit}')
+
+    unpublished.short_description = 'Снять с публикации'
+    unpublished.allowed_permissions = ('change',)
+
+    publish.short_description = 'Опубликовать'
+    publish.allowed_permissions = ('change',)
 
 
 @admin.register(Category)
