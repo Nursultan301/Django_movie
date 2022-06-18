@@ -1,6 +1,7 @@
-from datetime import date
-
 from django.db import models
+from datetime import date
+from ckeditor_uploader.fields import RichTextUploadingField
+
 from django.urls import reverse
 
 
@@ -51,7 +52,7 @@ class Movie(models.Model):
     """ Фильм """
     title = models.CharField("Называние", max_length=50, unique=True)
     tagline = models.CharField("Слоган", max_length=100, default="")
-    description = models.TextField("Описание")
+    description = RichTextUploadingField("Описание")
     poster = models.ImageField("Постер", upload_to="movies/")
     year = models.PositiveSmallIntegerField("Дата выхода", default=2021)
     country = models.CharField("Страна", max_length=30)
