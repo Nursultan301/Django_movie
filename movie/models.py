@@ -11,6 +11,8 @@ class Category(models.Model):
     description = models.TextField("Описание", blank=True)
     slug = models.SlugField("URL", unique=True)
 
+    objects = models.Manager
+
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
@@ -25,6 +27,9 @@ class Actor(models.Model):
     age = models.PositiveSmallIntegerField("Возраст", default=0)
     description = models.TextField("Описание", blank=True)
     image = models.ImageField("Изображение", upload_to="actors/")
+
+    def get_absolute_url(self):
+        return reverse('actor_detail', kwargs={'slug': self.name})
 
     class Meta:
         verbose_name = "Актеры и режиссеры"
@@ -66,6 +71,8 @@ class Movie(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, verbose_name="Категория")
     slug = models.SlugField("URL", max_length=50, unique=True)
     draft = models.BooleanField("Черновик", default=False)
+
+    objects = models.Manager
 
     class Meta:
         verbose_name = "Фильм"
