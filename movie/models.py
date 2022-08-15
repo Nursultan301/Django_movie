@@ -45,6 +45,8 @@ class Genre(models.Model):
     description = models.TextField("Описание", blank=True)
     slug = models.SlugField("URL", unique=True)
 
+    objects = models.Manager
+
     class Meta:
         verbose_name = "Жанр"
         verbose_name_plural = "Жанры"
