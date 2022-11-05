@@ -11,10 +11,10 @@ class GenreYear:
         return Genre.objects.all()
 
     def get_years(self):
-        return set(Movie.objects.filter(draft=False).values_list("year"))
+        return Movie.objects.filter(draft=False).values("year").distinct()
 
 
-class MovieView(ListView, GenreYear):
+class MovieView(GenreYear, ListView):
     """ Список фильмов """
     model = Movie
     queryset = Movie.objects.filter(draft=False)
@@ -22,7 +22,7 @@ class MovieView(ListView, GenreYear):
     context_object_name = 'movie_list'
 
 
-class MovieDetailView(DetailView, GenreYear):
+class MovieDetailView(GenreYear, DetailView):
     """ Полное описание фильма """
     model = Movie
     template_name = 'movie/movie_detail.html'
@@ -44,7 +44,7 @@ class AddReview(View):
         return redirect(movie.get_absolute_url())
 
 
-class ActorView(DetailView, GenreYear):
+class ActorView(GenreYear, DetailView):
     """Вывод информации об актёрах"""
     model = Actor
     template_name = 'movie/actor.html'
@@ -57,6 +57,6 @@ class FilterMovieView(GenreYear, ListView):
         queryset = Movie.objects.filter(
             Q(year__in=self.request.GET.getlist("year")) |
             Q(genres__in=self.request.GET.getlist("genre"))
-        )
+        ).distinct()
         return queryset
 

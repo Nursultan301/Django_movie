@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'ckeditor',
     'ckeditor_uploader',
+    'debug_toolbar',
 
     'movie.apps.MovieConfig',
 ]
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'django_movie.urls'
@@ -203,3 +205,5 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+INTERNAL_IPS = ["127.0.0.1"]

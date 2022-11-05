@@ -1,23 +1,23 @@
 {% load static %}
 {% load movie_tag %}
-    <div class="search-bar w3layouts-newsletter">
-        <h3 class="sear-head editContent">Поиск фильма</h3>
-        <form action="#" method="post" class="d-flex editContent">
-            <input type="search" placeholder="Введите название..." name="search" class="form-control"
-                   required="">
-            <button class="btn1 btn"><span class="fa fa-search" aria-hidden="true"></span></button>
-        </form>
-    </div>
-    <!--preference -->
+<div class="search-bar w3layouts-newsletter">
+    <h3 class="sear-head editContent">Поиск фильма</h3>
+    <form action="#" method="post" class="d-flex editContent">
+        <input type="search" placeholder="Введите название..." name="search" class="form-control"
+               required="">
+        <button class="btn1 btn"><span class="fa fa-search" aria-hidden="true"></span></button>
+    </form>
+</div>
+<!--preference -->
 <form action="{% url 'filter' %}" method="get">
     <div class="left-side my-4">
         <h3 class="sear-head editContent">Жанры</h3>
         <ul class="w3layouts-box-list">
             {% for genre in view.get_genres %}
-            	<li class="editContent">
-                <input type="checkbox" class="checked" name="genre" value="{{ genre.id }}">
-                <span class="span editContent">{{ genre.title }}</span>
-            </li>
+                <li class="editContent">
+                    <input type="checkbox" class="checked" name="genre" value="{{ genre.id }}">
+                    <span class="span editContent">{{ genre.title }}</span>
+                </li>
             {% endfor %}
         </ul>
     </div>
@@ -28,73 +28,73 @@
         <h3 class="sear-head editContent">Год</h3>
         <ul class="w3layouts-box-list">
             {% for movie in view.get_years %}
-            <li class="editContent">
-                <input type="checkbox" class="checked" name="year" value="{{ movie.year }}">
-                <span class="span editContent">{{ movie }}</span>
-            </li>
+                <li class="editContent">
+                    <input type="checkbox" class="checked" name="year" value="{{ movie.year }}">
+                    <span class="span editContent">{{ movie.year }}</span>
+                </li>
             {% endfor %}
         </ul>
     </div>
     <button type="submit">Найти</button>
 </form>
-    <!-- //discounts -->
-    <!-- reviews -->
-    <div class="customer-rev left-side my-4">
-        <h3 class="sear-head editContent">Рейтинг</h3>
-        <ul class="w3layouts-box-list">
-            <li>
-                <a href="#">
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="editContent">5.0</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="fa fa-star-o" aria-hidden="true"></span>
-                    <span class="editContent">4.0</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="fa fa-star-half-o" aria-hidden="true"></span>
-                    <span class="fa fa-star-o" aria-hidden="true"></span>
-                    <span class="editContent">3.5</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="fa fa-star-o" aria-hidden="true"></span>
-                    <span class="fa fa-star-o" aria-hidden="true"></span>
-                    <span class="editContent">3.0</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="fa fa-star" aria-hidden="true"></span>
-                    <span class="fa fa-star-half-o" aria-hidden="true"></span>
-                    <span class="fa fa-star-o" aria-hidden="true"></span>
-                    <span class="fa fa-star-o" aria-hidden="true"></span>
-                    <span class="editContent">2.5</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- //reviews -->
+<!-- //discounts -->
+<!-- reviews -->
+<div class="customer-rev left-side my-4">
+    <h3 class="sear-head editContent">Рейтинг</h3>
+    <ul class="w3layouts-box-list">
+        <li>
+            <a href="#">
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="editContent">5.0</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="fa fa-star-o" aria-hidden="true"></span>
+                <span class="editContent">4.0</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="fa fa-star-half-o" aria-hidden="true"></span>
+                <span class="fa fa-star-o" aria-hidden="true"></span>
+                <span class="editContent">3.5</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="fa fa-star-o" aria-hidden="true"></span>
+                <span class="fa fa-star-o" aria-hidden="true"></span>
+                <span class="editContent">3.0</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="fa fa-star" aria-hidden="true"></span>
+                <span class="fa fa-star-half-o" aria-hidden="true"></span>
+                <span class="fa fa-star-o" aria-hidden="true"></span>
+                <span class="fa fa-star-o" aria-hidden="true"></span>
+                <span class="editContent">2.5</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- //reviews -->
 {% get_last_movies count=2 %}
 
 

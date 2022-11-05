@@ -23,13 +23,13 @@ class ActorAdmin(admin.ModelAdmin):
 
 class ReviewInline(admin.TabularInline):
     model = Reviews
-    extra = 1
+    extra = 0
     readonly_fields = ('name', 'email')
 
 
 class MovieShotsInline(admin.TabularInline):
     model = MovieShots
-    extra = 1
+    extra = 0
     readonly_fields = ('get_photo',)
 
     def get_photo(self, obj):
@@ -40,7 +40,7 @@ class MovieShotsInline(admin.TabularInline):
 
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'slug', 'draft')
+    list_display = ('title', 'category', 'slug', 'year', 'draft')
     prepopulated_fields = {"slug": ("title",)}
     list_filter = ('category', 'year')
     search_fields = ('title', 'category__title')
@@ -49,7 +49,6 @@ class MovieAdmin(admin.ModelAdmin):
     readonly_fields = ("get_photo",)
     inlines = [MovieShotsInline, ReviewInline]
     save_on_top = True
-    save_as = True
     fieldsets = (
         (None, {
             "fields": (("title", "tagline"),)
