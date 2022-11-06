@@ -10,114 +10,119 @@
 {% endblock sidebar %}
 
 {% block movie %}
-	<div class="left-ads-display col-lg-8">
-    <div class="row">
-        <div class="desc1-left col-md-5">
-            <img src="{{ movie.poster.url }}" width="300" class="img-fluid" alt="">
-        </div>
-        <div class="desc1-right col-md-7 pl-lg-4">
-            <h3 class="editContent" style="outline: none; cursor: inherit;">{{ movie.title }}</h3>
-            <ul>
-                <li style="list-style: none"><span><b>Год:</b>{{ movie.year }}</span></li>
-                <li style="list-style: none"><span><b>Страна:</b>{{ movie.country }}</span></li>
-                <li style="list-style: none"><span><b>Слоган:</b>{{ movie.tagline }}</span></li>
-                <li style="list-style: none">
+    <div class="left-ads-display col-lg-8">
+        <div class="row">
+            <div class="desc1-left col-md-5">
+                <img src="{{ movie.poster.url }}" width="300" class="img-fluid" alt="">
+            </div>
+            <div class="desc1-right col-md-7 pl-lg-4">
+                <h3 class="editContent" style="outline: none; cursor: inherit;">{{ movie.title }}</h3>
+                <ul>
+                    <li style="list-style: none"><span><b>Год:</b>{{ movie.year }}</span></li>
+                    <li style="list-style: none"><span><b>Страна:</b>{{ movie.country }}</span></li>
+                    <li style="list-style: none"><span><b>Слоган:</b>{{ movie.tagline }}</span></li>
+                    <li style="list-style: none">
                     <span><b>Режиссер:</b>
                         {% for director in movie.directors.all %}
-                               <a href="{{ director.get_absolute_url }}">{{ director.name }}</a>
+                            <a href="{{ director.get_absolute_url }}">{{ director.name }}</a>
                         {% endfor %}
                     </span>
-                </li>
-                <li style="list-style: none">
+                    </li>
+                    <li style="list-style: none">
                     <span><b>Актеры:</b>
                         {% for actor in movie.actors.all %}
-                              <a href="{{ actor.get_absolute_url }}">{{ actor.name }}</a>
+                            <a href="{{ actor.get_absolute_url }}">{{ actor.name }}</a>
                         {% endfor %}
                     </span>
-                </li>
-                <li style="list-style: none">
+                    </li>
+                    <li style="list-style: none">
                     <span><b>Жанр:</b>
                         {% for genre in movie.genres.all %}
                             {{ genre.title }}
                         {% endfor %}
                     </span>
-                </li>
+                    </li>
+                    <li style="list-style: none"><span><b>Премьера в мире:</b> {{ movie.world_premiere }}</span></li>
+                    <li style="list-style: none"><span><b>Бюджет:</b> ${{ movie.budget }}</span></li>
+                    <li style="list-style: none"><span><b>Сборы в США:</b> ${{ movie.fees_in_usa }}</span></li>
+                    <li style="list-style: none"><span><b>Сборы в мире:</b> ${{ movie.fees_in_world }}</span></li>
 
+                    <li>
+                        <form action="{% url 'add_rating' %}" method="post" name="rating">
+                            <b>Рейтинг:</b>
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ request.path }}" name="next">
+                            <input type="hidden" value="{{ movie.id }}" name="movie">
+                            <span class="rating">
+                                {% for k, v in star_form.fields.star.choices %}
+                                    <input id="rating{{ v }}" type="radio" name="star" value="{{ k }}">
+                                    <label for="rating{{ v }}">{{  k }}</label>
+                                {% endfor %}
+                            </span>
+                            <span></span>
+                        </form>
+                    </li>
+                </ul>
 
-                <li style="list-style: none"><span><b>Премьера в мире:</b> {{ movie.world_premiere }}</span></li>
-                <li style="list-style: none"><span><b>Бюджет:</b> ${{ movie.budget }}</span></li>
-                <li style="list-style: none"><span><b>Сборы в США:</b> ${{ movie.fees_in_usa }}</span></li>
-                <li style="list-style: none"><span><b>Сборы в мире:</b> ${{ movie.fees_in_world }}</span></li>
-                <li style="list-style: none"><a href="#"><b>Рейтинг:</b>
-                        <span class="fa fa-star" aria-hidden="true"
-                              style="outline: none; cursor: inherit;"></span>
-                        <span class="fa fa-star" aria-hidden="true"
-                              style="outline: none; cursor: inherit;"></span>
-                        <span class="fa fa-star" aria-hidden="true"
-                              style="outline: none; cursor: inherit;"></span>
-                        <span class="fa fa-star" aria-hidden="true"
-                              style="outline: none; cursor: inherit;"></span>
-                        <span class="fa fa-star" aria-hidden="true"
-                              style="outline: none; cursor: inherit;"></span>
-                        <span class="editContent"
-                              style="outline: none; cursor: inherit;">5.0</span>
-                    </a>
-                </li>
-                <div class="share-desc">
-                    <div class="share">
-                        <h4 class="editContent" style="outline: none; cursor: inherit;">Share:</h4>
-                        <ul class="w3layouts_social_list list-unstyled">
-                            <li>
-                                <a href="#" class="w3pvt_facebook editContent" style="outline: none; cursor: inherit;">
-                                    <span class="fa fa-facebook-f" style="outline: none; cursor: inherit;"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w3pvt_twitter editContent" style="outline: none; cursor: inherit;">
-                                    <span class="fa fa-twitter" style="outline: none; cursor: inherit;"></span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="w3pvt_dribble editContent" style="outline: none; cursor: inherit;">
-                                    <span class="fa fa-dribbble" style="outline: none; cursor: inherit;"></span>
-                                </a>
-                            </li>
-                        </ul>
+                    <div class="share-desc">
+                        <div class="share">
+                            <h4 class="editContent" style="outline: none; cursor: inherit;">Share:</h4>
+                            <ul class="w3layouts_social_list list-unstyled">
+                                <li>
+                                    <a href="#" class="w3pvt_facebook editContent"
+                                       style="outline: none; cursor: inherit;">
+                                        <span class="fa fa-facebook-f" style="outline: none; cursor: inherit;"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="w3pvt_twitter editContent"
+                                       style="outline: none; cursor: inherit;">
+                                        <span class="fa fa-twitter" style="outline: none; cursor: inherit;"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="w3pvt_dribble editContent"
+                                       style="outline: none; cursor: inherit;">
+                                        <span class="fa fa-dribbble" style="outline: none; cursor: inherit;"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"></div>
                     </div>
-                    <div class="clearfix"></div>
-                </div>
+            </div>
         </div>
-    </div>
-    <div class="row sub-para-w3layouts mt-5">
+        <div class="row sub-para-w3layouts mt-5">
 
-        <h3 class="shop-sing editContent" style="outline: none; cursor: inherit;">
-            О фильме {{ movie.title }}</h3>
-        <p>
-            {% for image in movie.movieshots.all %}
-                <img src="{{ image.images.url }}" class="img-movie-shots" alt="{{ image.description }}">
-            {% endfor %}
-        </p>
-        <p class="editContent" style="outline: none; cursor: inherit;">{{ movie.description|safe }}</p>
-{#        <p class="mt-3 italic-blue editContent"#}
-{#           style="outline: none; cursor: inherit;">#}
-{#            <iframe width="560" height="315"#}
-{#                    src="https://www.youtube.com/embed/A36LahZNUiE?controls=0"#}
-{#                    frameborder="0" allow="accelerometer; autoplay;#}
-{#                                                                           encrypted-media; gyroscope; picture-in-picture"#}
-{#                    allowfullscreen>#}
-{##}
-{#            </iframe>#}
-{#        </p>#}
-    </div>
-    <hr>
-     <div class="row">
+            <h3 class="shop-sing editContent" style="outline: none; cursor: inherit;">
+                О фильме {{ movie.title }}</h3>
+            <p>
+                {% for image in movie.movieshots.all %}
+                    <img src="{{ image.images.url }}" class="img-movie-shots" alt="{{ image.description }}">
+                {% endfor %}
+            </p>
+            <p class="editContent" style="outline: none; cursor: inherit;">{{ movie.description|safe }}</p>
+            {#        <p class="mt-3 italic-blue editContent"#}
+            {#           style="outline: none; cursor: inherit;">#}
+            {#            <iframe width="560" height="315"#}
+            {#                    src="https://www.youtube.com/embed/A36LahZNUiE?controls=0"#}
+            {#                    frameborder="0" allow="accelerometer; autoplay;#}
+            {#                                                                           encrypted-media; gyroscope; picture-in-picture"#}
+            {#                    allowfullscreen>#}
+            {##}
+            {#            </iframe>#}
+            {#        </p>#}
+        </div>
+        <hr>
+        <div class="row">
             <div class="single-form-left">
                 <!-- contact form grid -->
                 <div class="contact-single">
-                    <h3 class="editContent" ><span class="sub-tittle editContent">{{ movie.reviews_set.count }}</span>Оставить отзыв</h3>
+                    <h3 class="editContent"><span class="sub-tittle editContent">{{ movie.reviews_set.count }}</span>Оставить
+                        отзыв</h3>
                     <form action="{% url 'add_review' movie.id %}" method="post" class="mt-4" id="formReview">
                         {% csrf_token %}
-                         <input type="hidden"  name="parent" id="contactparent" value="">
+                        <input type="hidden" name="parent" id="contactparent" value="">
                         <div class="form-group editContent">
                             <label for="contactcomment" class="editContent">
                                 Ваш комментарий *
@@ -162,19 +167,20 @@
                     </p>
                     <a href="#formReview" onclick="addReview('{{ review.name }}', '{{ review.id }}')">Ответить</a>
                     {% for rev in review.reviews_set.all %}
-                    <div class="media mt-5 editContent">
-                        <a class="pr-3" href="#">
-                            <img src="{% static '/images/te2.jpg' %}" class="img-fluid " alt="image">
-                        </a>
-                        <div class="media-body">
-                            <h5 class="mt-0 editContent">{{ rev.name }}</h5>
-                            <p class="mt-2 editContent">{{ rev.text }}</p>
+                        <div class="media mt-5 editContent">
+                            <a class="pr-3" href="#">
+                                <img src="{% static '/images/te2.jpg' %}" class="img-fluid " alt="image">
+                            </a>
+                            <div class="media-body">
+                                <h5 class="mt-0 editContent">{{ rev.name }}</h5>
+                                <p class="mt-2 editContent">{{ rev.text }}</p>
+                            </div>
                         </div>
-                    </div>
                     {% endfor %}
                 </div>
             </div>
         {% endfor %}
+    </div>
     </div>
     </div>
     <script>
