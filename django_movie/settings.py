@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'snowpenguin.django.recaptcha3',
 
     'movie.apps.MovieConfig',
+    'contact.apps.ContactConfig'
 ]
 
 MIDDLEWARE = [
