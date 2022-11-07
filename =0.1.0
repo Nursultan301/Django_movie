@@ -1,0 +1,6 @@
+Requirement already satisfied: django-recaptcha3 in ./venv/lib/python3.10/site-packages (0.4.0)
+Requirement already satisfied: requests in ./venv/lib/python3.10/site-packages (from django-recaptcha3) (2.28.1)
+Requirement already satisfied: charset-normalizer<3,>=2 in ./venv/lib/python3.10/site-packages (from requests->django-recaptcha3) (2.1.1)
+Requirement already satisfied: idna<4,>=2.5 in ./venv/lib/python3.10/site-packages (from requests->django-recaptcha3) (3.4)
+Requirement already satisfied: certifi>=2017.4.17 in ./venv/lib/python3.10/site-packages (from requests->django-recaptcha3) (2022.9.24)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in ./venv/lib/python3.10/site-packages (from requests->django-recaptcha3) (1.26.12)
