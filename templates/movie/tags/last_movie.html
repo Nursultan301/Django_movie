@@ -1,5 +1,6 @@
+{% load i18n %}
 <div class="deal-leftmk left-side">
-    <h3 class="sear-head editContent">Последние добавленные</h3>
+    <h3 class="sear-head editContent">{% trans "Последние добавленные" %}</h3>
     {% for movie in last_movies %}
         <div class="special-sec1 row mt-3 editContent">
             <div class="img-deals col-md-4">
