@@ -115,9 +115,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
-
-MODELTRANSLATION_LANGUAGE = ('ru', 'en')
 
 gettext = lambda s: s
 LANGUAGES = (
