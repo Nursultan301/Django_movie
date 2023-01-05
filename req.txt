@@ -2,9 +2,8 @@ asgiref==3.5.2
 certifi==2022.9.24
 charset-normalizer==2.1.1
 Django==3.2
-django-ckeditor==6.5.1
-django-cuser==2017.3.16
-django-debug-toolbar==3.7.0
+django-ckeditor==5.9.0
+django-debug-toolbar==3.2.3
 django-js-asset==2.0.0
 django-modeltranslation==0.14.4
 django-recaptcha3==0.1.0
