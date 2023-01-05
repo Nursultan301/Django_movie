@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'debug_toolbar',
     'django.contrib.flatpages',
 
     'ckeditor',
     'ckeditor_uploader',
-    # 'debug_toolbar',
     'snowpenguin.django.recaptcha3',
 
     'movie.apps.MovieConfig',
@@ -58,7 +58,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'django_movie.urls'
@@ -211,7 +211,7 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-# INTERNAL_IPS = ["127.0.0.1"]
+INTERNAL_IPS = ["127.0.0.1"]
 
 RECAPTCHA_PUBLIC_KEY = '6LcPW-YiAAAAAMX5o1tDT9OuTafU_riHRd84PFPh'
 RECAPTCHA_PRIVATE_KEY = '6LcPW-YiAAAAAGrBRnMzSYIyKleaQLZKqHyPaEx0'
