@@ -18,10 +18,10 @@ class GenreYear:
 class MovieView(GenreYear, ListView):
     """ Список фильмов """
     model = Movie
-    queryset = Movie.objects.filter(draft=False)
+    queryset = Movie.objects.filter(draft=False)#.only('title', 'tagline', 'poster')
     template_name = 'movie/movie_list.html'
     context_object_name = 'movie_list'
-    paginate_by = 3
+    paginate_by = 6
 
 
 class MovieDetailView(GenreYear, DetailView):
