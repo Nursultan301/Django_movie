@@ -1,5 +1,5 @@
 {% extends 'movie/base.html' %}
-{% load static %}
+{% load static i18n %}
 {% block title %} {{ actor.name }} {% endblock title %}
 {% block container %}
     <div class="container py-md-3">
@@ -22,15 +22,15 @@
                 <h5 class="editContent"></h5>
                 <ul>
                     <li>
-                        <span><b>Возраст:</b> {{ actor.age }} лет</span></li>
+                        <span><b>{% trans "Возраст" %}:</b> {{ actor.age }} лет</span></li>
                     <li>
-                        <span><b>Режиссер:</b>
+                        <span><b>{% trans "Режиссер" %}:</b>
                             {% for movie in actor.film_director.all %}
                                 {{ movie.title }},
                             {% endfor %}
                         </span>
                     </li>
-                    <li><span><b>Актер:</b>
+                    <li><span><b>{% trans "Актер" %}:</b>
                         {% for movie in actor.film_actor.all %}
                             {{ movie.title }},
                         {% endfor %}

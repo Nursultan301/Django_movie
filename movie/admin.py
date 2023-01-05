@@ -1,17 +1,18 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
+from modeltranslation.admin import TranslationAdmin
 
 from .models import Category, Genre, Actor, Movie, RatingStar, Rating, Reviews, MovieShots
 
 
 @admin.register(Genre)
-class GenreAdmin(admin.ModelAdmin):
+class GenreAdmin(TranslationAdmin):
     list_display = ('title', 'slug')
     prepopulated_fields = {"slug": ("title",)}
 
 
 @admin.register(Actor)
-class ActorAdmin(admin.ModelAdmin):
+class ActorAdmin(TranslationAdmin):
     list_display = ('name', 'age', 'get_photo')
     readonly_fields = ('get_photo',)
 
@@ -39,7 +40,7 @@ class MovieShotsInline(admin.TabularInline):
 
 
 @admin.register(Movie)
-class MovieAdmin(admin.ModelAdmin):
+class MovieAdmin(TranslationAdmin):
     list_display = ('title', 'category', 'slug', 'year', 'draft')
     prepopulated_fields = {"slug": ("title",)}
     list_filter = ('category', 'year')
@@ -102,7 +103,7 @@ class MovieAdmin(admin.ModelAdmin):
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin):
     list_display = ('id', 'title', 'slug')
     list_display_links = ('id', 'title')
     prepopulated_fields = {"slug": ("title",)}
@@ -120,7 +121,7 @@ class RatingAdmin(admin.ModelAdmin):
 
 
 @admin.register(MovieShots)
-class MovieShotsAdmin(admin.ModelAdmin):
+class MovieShotsAdmin(TranslationAdmin):
     list_display = ('title', 'movie', 'get_photo')
     readonly_fields = ('get_photo',)
 
