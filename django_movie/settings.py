@@ -72,19 +72,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'django_movie.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-
-# Password validation
-# https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -129,9 +116,7 @@ LOCALE_PATHS = (BASE_DIR / 'locale',)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_DIR = BASE_DIR / 'static'
-STATICFILES_DIRS = [STATIC_DIR]
-# STATIC_ROOT = BASE_DIR / 'static'
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -219,4 +204,7 @@ RECAPTCHA_SCORE_THRESHOLD = 0.5
 
 SITE_ID = 1
 
-
+try:
+    from .local_settings import *
+except ImportError:
+    from .prod_settings import *
